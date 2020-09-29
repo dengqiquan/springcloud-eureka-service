@@ -1,0 +1,26 @@
+server:
+  port: 9001
+spring:
+  application:
+    name: cloud-eureka-server
+
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://localhost:9001/eureka
+  server:
+    enable-self-preservation: false #是否开启自我保护（运行期间spring会统计信条失败的比例在15分钟之内是否低于85%，如果不低于85%，Eureka会将实例注册信息保护起来，让这些实例不会过期）
+    eviction-interval-timer-in-ms: 3000      #3秒钟自动剔除失效的节点
+    response-cache-update-interval-ms: 3000  #eureka server刷新readCacheMap的时间
+    instance:
+      prefer-ip-address: true
+
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
